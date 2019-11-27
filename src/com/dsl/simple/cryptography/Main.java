@@ -23,12 +23,14 @@ public class Main
             Crypto.setPublicKey(publicKey);
             Crypto.setPrivateKey(privateKey);
 
-            String encryptedString = Crypto.encrypt("This is confidential text");
+            String text = "This is confidential text";
+            System.out.println("Before Encrypt: " + text);
+            String encryptedString = Crypto.encrypt(text);
             if(Objects.nonNull(encryptedString))
             {
-                System.out.println("Encrypted: " + encryptedString);
+                System.out.println("After Encrypted: " + encryptedString);
                 String decryptedString = Crypto.decrypt(encryptedString);
-                System.out.println("Decrypted: " + decryptedString);
+                System.out.println("After Decrypted: " + decryptedString);
             }
         }
         catch (IOException e)

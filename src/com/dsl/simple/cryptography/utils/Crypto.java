@@ -17,6 +17,8 @@ public final class Crypto
     private static byte[] publicKey;
     private static byte[] privateKey;
 
+    private static final String ALGORITHM = "RSA";
+    
     public static void setPublicKey(byte[] publicKey)
     {
         Crypto.publicKey = publicKey;
@@ -32,11 +34,11 @@ public final class Crypto
         try
         {
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKey);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
 
             PublicKey publicKey = keyFactory.generatePublic(keySpec);
 
-            Cipher cipher = Cipher.getInstance("RSA");
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
             byte[] data = text.getBytes(StandardCharsets.UTF_8);
@@ -57,11 +59,11 @@ public final class Crypto
         try
         {
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKey);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
 
             PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
 
-            Cipher cipher = Cipher.getInstance("RSA");
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
             byte[] data = Base64.getDecoder().decode(encryptedString.getBytes(StandardCharsets.UTF_8));

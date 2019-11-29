@@ -47,9 +47,9 @@ public class KeyGenerator
     private File makeDir(String filePath)
     {
         File file = new File(filePath);
-        if(!file.exists() && file.getParentFile().mkdir())
+        if (!file.exists())
         {
-            return file;
+            file.getParentFile().mkdir();
         }
         return file;
     }
